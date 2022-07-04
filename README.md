@@ -743,6 +743,7 @@ root ALL=(ALL) ALL
 - root ALL = (ALL) ALL은 슈퍼 사용자가 모든 호스트상에서 어떤 명령이든지 실행하는 sudo를 사용할 수도 있다는 의미이다.
 - (ALL)은 슈퍼 사용자가 다른 기타 사용자처럼 명령을 실행할 수도 있다는 의미이다.
 
+
 # 4장. 디스크와 파일 시스템
 
 **파티션** 
@@ -859,3 +860,26 @@ cat /sys/block/sda/sda2/start
 - **```HFS+(hfplus)```**
 	- 대부분의 매킨토시 시스템에서 사용되는 애플 표준
 ## 4.2.2 파일 시스템 생성
+- ```mkfs -t ext4 /dev/sdf2```
+	- mkfs를 통해서 파일 시스템 생성, 
+## 4.2.3 파일 시스템 마운팅
+- 마운트란 무엇인가?:
+	- 윈도우로 비교하면  USB를 꽃으면 폴더에 USB파일이 뜨면서 자동으로 연결되는것.
+	- 디스크와 같은 **물리적인 장치(파일 시스템)** 를 **특정 디렉터리**에 연결해주는 것.
+- **마운트 포인트** -  디렉터리 계층 구조에서 파일 시스템이 연결되는 디렉터리를 마운트 포인트라고 한다.
+- 부팅될때 자동으로 파일 시스템이 마운트 되기 하려면 ```/etc/fsteb``` 파일에서 설정
+- ```/etc/fstab``` 파일의 기능: 파일 시스템의 마운트 설정 정보 저장
+-![](https://velog.velcdn.com/images%2Fmarkyang92%2Fpost%2F4c8c9e34-bcc5-4f98-beaa-4a56548edafa%2Fimage.png)
+### $ mount : 마운트 정보 출력
+- 각자의 시스템에 대한 현재 파일 시스템 상황을 알려면 mount를 실행시키도록 한다. 
+- 디바이스파일/마운트 포인트/파일 시스템/ 권한 등을 출력한다.
+![](https://velog.velcdn.com/images%2Fmarkyang92%2Fpost%2F8c47d423-0bc5-4b1d-9244-7f2b865d5504%2Fimage.png)
+
+## 파티션을 마운트포인트에 마운트 및 옵션
+### `$ mount -t <part> <mp> -o <opt>`
+$ mount -t *type device mountpoint*
+
+## $ unmount <포인트>
+- ```$ unmount <마운트 포인트>``` : 마운트 포인트를 언마운트
+- 터미널이 **마운트 포인트**위치에 있을 때 unmount하면 ```device is busy``` 가 뜬다.
+```$ sudo unmount <언마운트 하고 싶은 곳>```
